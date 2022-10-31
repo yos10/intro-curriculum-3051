@@ -7,7 +7,8 @@ services:
       - 8000:8000
     volumes:
       - .:/app
-      - /app/node_modules
+      # ローカルマシン側が Linux な場合、ファイルシステムに違いはないのでファイルを変換する手間がないためファイルの共有設定をしていてもパフォーマンスの低下は起きないそうです。なのでこの設定はしなくてOK
+      # - /app/node_modules
     depends_on:
       - db
   db:
@@ -16,6 +17,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: nn_chat
-      TZ: "Asia/Tokyo"
+      TZ: 'Asia/Tokyo'
     volumes:
       - ../nn-chat-db:/var/lib/postgresql/data
